@@ -1,6 +1,7 @@
 // 1. Use the inquirer npm package to get user input.
 
 import inquirer from 'inquirer';
+import fs from "fs"
 
 inquirer
     .prompt([{
@@ -9,6 +10,11 @@ inquirer
     }])
     .then((answers) => {
         const url = answers.URL;
+
+        fs.writeFile('URL.txt', url, (err) => {
+            if (err) throw err;
+            console.log('The file has been saved!');
+        }); 
     })
     .catch((error) => {
         if (error.isTtyError) {
